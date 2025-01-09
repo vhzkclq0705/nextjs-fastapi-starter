@@ -19,18 +19,18 @@ def age_calculator(birthday: str) -> Dict[str, str]:
     :return: 생년월일 및 만나이, 띠 를 포함한 JSON 응답
     """
     zodiac_animals = [
-    "쥐띠 🐀 ", 	# 자 - 쥐
-    "소띠 🐂",      	# 축 - 소
-    "호랑이띠 🐅",    	# 인 - 호랑이
-    "토끼띠 🐇",   	# 묘 - 토끼
-    "용띠 🐉",   	# 진 - 용
-    "뱀띠 🐍",    	# 사 - 뱀
-    "말띠 🐎",    	# 오 - 말
-    "양띠 🐐",     	# 미 - 양
-    "원숭이띠 🐒",  	# 신 - 원숭이
-    "닭띠 🐓",  	# 유 - 닭
-    "개띠 🐕",     	# 술 - 개
-    "돼지띠 🐖"       	# 해 - 돼지
+        "🐀 Rat",      # 자 - 쥐
+        "🐂 Ox",       # 축 - 소
+        "🐅 Tiger",    # 인 - 호랑이
+        "🐇 Rabbit",   # 묘 - 토끼
+        "🐉 Dragon",   # 진 - 용
+        "🐍 Snake",    # 사 - 뱀
+        "🐎 Horse",    # 오 - 말
+        "🐐 Goat",     # 미 - 양
+        "🐒 Monkey",   # 신 - 원숭이
+        "🐓 Rooster",  # 유 - 닭
+        "🐕 Dog",      # 술 - 개
+        "🐖 Pig"       # 해 - 돼지
     ]
 
     today = date.today()
@@ -38,7 +38,7 @@ def age_calculator(birthday: str) -> Dict[str, str]:
     age  = today.year - birth_date.year
     
     # TODO 띠 계산
-    zodiac_animal = zodiac_animals[(today.year - 1900) % 12]
+    zodiac_animal = zodiac_animals[(birth_date.year - 1900) % 12]
 
     # FiX 생일 지난 여부 확인
     if (birth_date.month > today.month) or (birth_date.month == today.month and birth_date.day > today.day):
@@ -46,7 +46,7 @@ def age_calculator(birthday: str) -> Dict[str, str]:
 
     return {
             "birthday": birthday,
-            "age": f"만 {age}세, {zodiac_animal}",
+            "age": f"{age}, Your zodiac: {zodiac_animal}",
             "basedate": str(today),
             "message": "Age calculated successfully!"
             }

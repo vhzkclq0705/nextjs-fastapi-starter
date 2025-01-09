@@ -61,7 +61,7 @@ export default function Home() {
           <div className="mt-4 text-center text-green-600 font-semibold">
             Your age: {age}
           </div>
-	  <div className="mt-4 text-center text-bluen-500 font-bold">
+	  <div className="mt-4 text-center text-blue-500 font-bold">
 	    Your zodiac: {zodiac}
           </div>
         )}

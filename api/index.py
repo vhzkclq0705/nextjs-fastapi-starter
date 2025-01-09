@@ -38,7 +38,7 @@ def age_calculator(birthday: str) -> Dict[str, str]:
     age  = today.year - birth_date.year
     
     # TODO 띠 계산
-    zodiac_animal = zodiac_animals[(birth_date.year - 1900) % 12]
+    zodiac = zodiac_animals[(birth_date.year - 1900) % 12]
 
     # FiX 생일 지난 여부 확인
     if (birth_date.month > today.month) or (birth_date.month == today.month and birth_date.day > today.day):
@@ -46,7 +46,8 @@ def age_calculator(birthday: str) -> Dict[str, str]:
 
     return {
             "birthday": birthday,
-            "age": f"{age}, Your zodiac: {zodiac_animal}",
+            "age": age,
+            "zodiac": zodiac,
             "basedate": str(today),
             "message": "Age calculated successfully!"
             }

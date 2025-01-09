@@ -63,6 +63,7 @@ export default function Home() {
           </div>
 	  <div className="mt-4 text-center text-bluen-500 font-bold">
 	    Your zodiac: {zodiac}
+          </div>
         )}
         {error && (
           <div className="mt-4 text-center text-red-600 font-semibold">

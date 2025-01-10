@@ -35,6 +35,7 @@ def age_calculator(birthday: str) -> Dict[str, str]:
 
     today = date.today()
     birth_date = datetime.strptime(birthday, "%Y-%m-%d").date()
+    kage = today.year - birth_date.year
     age  = today.year - birth_date.year
     
     # TODO 띠 계산
@@ -47,6 +48,8 @@ def age_calculator(birthday: str) -> Dict[str, str]:
     return {
             "birthday": birthday,
             "age": str(age),
+            "kage": str(kage),
+            "speaker": "권오준",
             "zodiac": zodiac,
             "basedate": str(today),
             "message": "Age calculated successfully!"

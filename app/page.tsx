@@ -22,7 +22,7 @@ export default function Home() {
     }
 
     try {
-      const response = await fetch(`/api/py/ageCalculator/${birthday}`);
+      const response = await fetch(`/api/py/ageCalculator?birthday=${birthday}&reference_date=${referenceDate}`);
       const data = await response.json();
 
       if (response.ok) {
@@ -42,7 +42,7 @@ export default function Home() {
         <h1 className="text-3xl font-bold text-center">만나이 + 띠  계산기</h1>
         <h1 className="text-xl font-bold text-center text-green-600">WHY NOT?</h1>
 
-        <div>
+        <div className="flex space-x-4">
           <div className="w-1/2">
             <label htmlFor="birthday" className="block text-sm font-medium text-gray-700">
               Enter your birthday

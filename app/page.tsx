@@ -6,6 +6,7 @@ import { useState } from "react";
 
 export default function Home() {
   const [birthday, setBirthday] = useState("");
+  const [referenceDate, setReferenceDate] = useState(new Date().toISOString().split("T")[0]);
   const [age, setAge] = useState<number | null>(null);
   const [zodiac, setZodiac] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -42,15 +43,29 @@ export default function Home() {
         <h1 className="text-xl font-bold text-center text-green-600">WHY NOT?</h1>
 
         <div>
-          <label htmlFor="birthday" className="block text-sm font-medium text-gray-700">
-            Enter your birthday
-          </label>
-          <Input
-            type="date"
-            id="birthday"
-            value={birthday}
-            onChange={(e) => setBirthday(e.target.value)}
-          />
+          <div className="w-1/2">
+            <label htmlFor="birthday" className="block text-sm font-medium text-gray-700">
+              Enter your birthday
+            </label>
+            <Input
+              type="date"
+              id="birthday"
+              value={birthday}
+              onChange={(e) => setBirthday(e.target.value)}
+            />
+          </div>
+
+          <div className="w-1/2">
+            <label htmlFor="referenceDate" className="block text-sm font-medium text-gray-700">
+             Enter yout reference date
+            </label>
+            <Input
+              type="date"
+              id="referenceDate"
+              value={referenceDate}
+              onChange={(e) => setReferenceDate(e.target.value)}
+            />
+          </div>
         </div>
 
         <Button onClick={handleCalculateAge} className="w-full">

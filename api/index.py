@@ -1,3 +1,4 @@
+import korean_age_calculator as kac
 from fastapi import FastAPI
 from datetime import datetime, date
 from typing import Dict
@@ -35,7 +36,7 @@ def age_calculator(birthday: str) -> Dict[str, str]:
 
     today = date.today()
     birth_date = datetime.strptime(birthday, "%Y-%m-%d").date()
-    kage = today.year - birth_date.year
+    kage = kac.how_korean_age(year_of_birth=birth_date.year)
     age  = today.year - birth_date.year
     
     # TODO 띠 계산

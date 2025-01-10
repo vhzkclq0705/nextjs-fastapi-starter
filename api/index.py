@@ -9,13 +9,14 @@ app = FastAPI(docs_url="/api/py/docs", openapi_url="/api/py/openapi.json")
 def hello_fast_api():
     return {"message": "Hello from FastAPI"}
 
-@app.get("/api/py/ageCalculator/{birthday}")
+@app.get("/api/py/ageCalculator/")
 
-def age_calculator(birthday: str) -> Dict[str, str]:
+def age_calculator(birthday: str, reference_date: str) -> Dict[str, str]:
     """
     생년월일을 입력받아 만나이를 계산하는 API
 
     :param birthday: 생년월일 (형식: YYYY-MM-DD)
+    :reference_date: 기준일 (형식: YYYY-MM-DD)
     :return: 생년월일 및 만나이, 띠 를 포함한 JSON 응답
     """
     zodiac_animals = [
@@ -33,19 +34,20 @@ def age_calculator(birthday: str) -> Dict[str, str]:
         "🐖 Pig"       # 해 - 돼지
     ]
 
-    today = date.today()
     birth_date = datetime.strptime(birthday, "%Y-%m-%d").date()
-    age  = today.year - birth_date.year
+    ref_date = datetime.strptime(reference_date, "%Y-%m-%d").date()
+    age  = ref_date.year - birth_date.year
     
     # TODO 띠 계산
     zodiac = zodiac_animals[(birth_date.year - 1900) % 12]
 
     # FiX 생일 지난 여부 확인
-    if (birth_date.month > today.month) or (birth_date.month == today.month and birth_date.day > today.day):
+    if (birth_date.month > ref_date.month) or (birth_date.month == ref_date.month and birth_date.day > ref_date.day):
         age -= 1
 
     return {
             "birthday": birthday,
+            "reference_date": reference_date,
             "age": str(age),
             "zodiac": zodiac,
             "basedate": str(today),

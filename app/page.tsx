@@ -7,12 +7,14 @@ import { useState } from "react";
 export default function Home() {
   const [birthday, setBirthday] = useState("");
   const [age, setAge] = useState<number | null>(null);
+  const [kage, setKage] = useState<number | nill>(null);
   const [zodiac, setZodiac] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const handleCalculateAge = async () => {
     setError(null);
     setAge(null);
+    setKage(null);
     setZodiac(null);
 
     if (!birthday) {
@@ -26,6 +28,7 @@ export default function Home() {
 
       if (response.ok) {
         setAge(data.age);
+        setKage(data.kage);
         setZodiac(data.zodiac);
       } else {
         setError(data.error || "Failed to calculate age.");
@@ -38,7 +41,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-green-600 p-4">
       <div className="max-w-md w-full bg-white shadow-md rounded p-6 space-y-4">
-        <h1 className="text-3xl font-bold text-center">만나이 + 띠  계산기</h1>
+        <h1 className="text-3xl font-bold text-center">나이 계산기(만, 연, 띠)</h1>
         <h1 className="text-xl font-bold text-center text-green-600">WHY NOT?</h1>
 
         <div>
@@ -62,6 +65,12 @@ export default function Home() {
             Your age: {age}
           </div>
         )}
+
+	{kage != null && (
+	  <div className="mt-4 text-center text-red-600 font-semibold">
+	    Your korean_age: {kage}
+	  </div>
+	)}
 
         {zodiac && (
           <div className="mt-4 text-center text-blue-600 font-semibold">

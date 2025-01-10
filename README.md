@@ -16,3 +16,35 @@ $ source venv/bin/activate
 $ uvicorn api.index:app --reload
 # $ deactivate
 ```
+
+### Contributing
+- scenario #1
+```bash
+# setting ssh
+$ git clone <URL>
+$ git branch <VER>/<NAME>
+$ git checkout <VER>/<NAME>
+$ git push
+# make PR
+# do someting
+$ git add <FILE_NAME>
+$ git commit -m "<MESSAGE>"
+$ git push
+
+# merge main -> deploy
+# release & tag
+```
+
+- scenario #2
+```bash
+$ git branch -r
+$ git checkout -t origin/<VER>/<NAME>
+# do something
+$ git add <FILE_NAME>
+$ git commit -m "<MESSAGE>"
+$ git push
+
+# merge main -> deploy
+# release & tag
+
+```

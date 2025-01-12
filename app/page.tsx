@@ -10,6 +10,7 @@ export default function Home() {
   const [kage, setKage] = useState<number | null>(null);
   const [zodiac, setZodiac] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [student, setStudent] = useState<string | null>(null);
 
   const handleCalculateAge = async () => {
     setError(null);
@@ -38,6 +39,25 @@ export default function Home() {
     }
   };
 
+  // 랜덤 학생 뽑기
+  const getRandomStudent = async () => {
+    setError(null);
+    setStudent(null);
+
+    try {
+      const response = await fetch(`/api/py/randomStudent`);
+      const data = await response.json();
+
+      if (response.ok) {
+	setStudent(data.student);
+      } else {
+	setError(data.error || "Failed to get a student.");
+      }
+    } catch (err) {
+      setError("An error occurred while fetching the API.");
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-green-600 p-4">
       <div className="max-w-md w-full bg-white shadow-md rounded p-6 space-y-4">
@@ -60,6 +80,10 @@ export default function Home() {
           Calculate Age
         </Button>
 
+	<Button onClick={getRandomStudent} className="w-full">
+	  Get a random student
+	</Button>
+
         {age !== null && (
           <div className="mt-4 text-center text-green-600 font-semibold">
             Your age: {age}
@@ -77,6 +101,12 @@ export default function Home() {
             Your zodiac: {zodiac}
           </div>
         )}
+
+	{student && (
+	  <div className="mt-4 text-center text-orange-600 font-semibold">
+	    Student: {student}
+	  </div>
+	)}
          
         {error && (
           <div className="mt-4 text-center text-red-600 font-semibold">

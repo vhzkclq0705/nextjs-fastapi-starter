@@ -3,7 +3,6 @@ from fastapi import FastAPI
 from datetime import datetime, date
 from typing import Dict
 import random
-import subprocess
 import sys
 
 ### Create FastAPI instance with custom docs and openapi url
@@ -20,11 +19,17 @@ def get_os_version() -> Dict[str, str]:
     
     :return: OS의 종류 및 버전을 포함한 JSON 응답
     """
-    os_version = subprocess.run(["cat /etc/os-release | grep \"PRETTY_NAME\""], shell=True, capture_coutput=True, text=True)
-    os_version = os_version.stdout.split("=")[1].strip('"')
+    os_version = ""
 
+    with open("/etc/os-release", "r") as f:
+	for line in f:
+	    if line.startswith("PRETTY_NAME="):
+		os_version = line.split("=")[1].replace("\n", "").strip('"')
+	        break
+    
     return {
 	"os_version": os_version
+	"message": "Got the OS version successfully!"
     }
 
 @app.get("/api/py/ageCalculator/{birthday}")

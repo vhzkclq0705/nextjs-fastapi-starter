@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from datetime import datetime, date
 from typing import Dict
 import random
-import subpross
+import subprocess
 import sys
 
 ### Create FastAPI instance with custom docs and openapi url

@@ -13,30 +13,18 @@ app = FastAPI(docs_url="/api/py/docs", openapi_url="/api/py/openapi.json")
 def hello_fast_api():
     return {"message": "Hello from FastAPI"}
 
-@app.get("/api/py/getMacOSVersions")
-def get_os_version_of_mac() -> Dict[str, str]:
+@app.get("/api/py/getOSVersion")
+def get_os_version() -> Dict[str, str]:
     """
-    MacOS의 시스템 버전과 커널 버전을 받아오는 API
+    OS의 종류와 버전을 받아오는 API
     
-    :return: 시스템 및 커널 버전을 포함한 JSON 응답
+    :return: OS의 종류 및 버전을 포함한 JSON 응답
     """
-
-    # 파이썬에서 터미널 명령어를 실행하고 결과를 원하는 형태로 변경하는 함수
-    def get_macro_reply(command) -> str:
-        result = subprocess.run([command], capture_output=True, text=True).stdout
-	return ''.join(result.split()[2:])
-
-    base_command = "system_profiler SPSoftwareDataType | grep "
-    system_filter_command = "\"System Version\""
-    kernel_filter_command = "\"Kernel Version\""
-
-    system_version = get_macro_reply(base_command + system_filter_command)
-    kernel_version = get_macro_reply(base_command + kernel_filter_command)
+    os_version = subprocess.run(["cat /etc/os-release | grep \"PRETTY_NAME\""])
+    os_version = os_version.split("=")[1].strip("")
 
     return {
-	"system_version": system_version,
-	"kernel_version": kernel_version,
-	"message": "Got the versions successfully!"
+	"os_version": os_version
     }
 
 @app.get("/api/py/ageCalculator/{birthday}")

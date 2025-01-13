@@ -28,7 +28,7 @@ def get_os_version() -> Dict[str, str]:
 	        break
     
     return {
-	"os_version": os_version
+	"os_version": os_version,
 	"message": "Got the OS version successfully!"
     }
 

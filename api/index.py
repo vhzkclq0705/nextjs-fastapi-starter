@@ -20,8 +20,8 @@ def get_os_version() -> Dict[str, str]:
     
     :return: OS의 종류 및 버전을 포함한 JSON 응답
     """
-    os_version = subprocess.run(["cat /etc/os-release | grep \"PRETTY_NAME\""])
-    os_version = os_version.split("=")[1].strip("")
+    os_version = subprocess.run(["cat /etc/os-release | grep \"PRETTY_NAME\""], shell=True, capture_coutput=True, text=True)
+    os_version = os_version.stdout.split("=")[1].strip('"')
 
     return {
 	"os_version": os_version

@@ -19,17 +19,18 @@ def get_os_version() -> Dict[str, str]:
     
     :return: OS의 종류 및 버전을 포함한 JSON 응답
     """
-    os_version = ""
-
-    with open("/etc/os-release", "r") as f:
-	for line in f:
-	    if line.startswith("PRETTY_NAME="):
-		os_version = line.split("=")[1].replace("\n", "").strip('"')
-	        break
+    def get_macro():
+        with open("/etc/os-release", "r") as f:
+            for line in f:
+	        if line.startswith("PRETTY_NAME="):
+		    return line.split("=")[1].replace("\n", "").strip('"')
+ 	return None
     
+    result = get_macro()
+
     return {
-	"os_version": os_version,
-	"message": "Got the OS version successfully!"
+	"os_version": result if result else "",
+	"message": "Got the OS version successfully!" if result else "Failed to get the OS version."
     }
 
 @app.get("/api/py/ageCalculator/{birthday}")

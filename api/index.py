@@ -1,4 +1,5 @@
 import korean_age_calculator as kac
+import check_os_version import get_os_version
 from fastapi import FastAPI
 from datetime import datetime, date
 from typing import Dict
@@ -19,18 +20,9 @@ def get_os_version() -> Dict[str, str]:
     
     :return: OS의 종류 및 버전을 포함한 JSON 응답
     """
-    def get_macro():
-        with open("/etc/os-release", "r") as f:
-            for line in f:
-	        if line.startswith("PRETTY_NAME="):
-		    return line.split("=")[1].replace("\n", "").strip('"')
- 	return None
-    
-    result = get_macro()
-
     return {
-	"os_version": result if result else "",
-	"message": "Got the OS version successfully!" if result else "Failed to get the OS version."
+	"os_version": get_os_version(),
+	"message": "Got the OS version successfully!"
     }
 
 @app.get("/api/py/ageCalculator/{birthday}")

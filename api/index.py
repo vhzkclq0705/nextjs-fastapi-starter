@@ -1,5 +1,5 @@
 import korean_age_calculator as kac
-import check_os_ver.osver import get_os_version
+from check_os_ver.osver import get_os_version
 from fastapi import FastAPI
 from datetime import datetime, date
 from typing import Dict

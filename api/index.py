@@ -1,5 +1,5 @@
 import korean_age_calculator as kac
-from check_os_ver.osver import get_os_version
+from check_os_ver.osver import get_os_version as gov
 from fastapi import FastAPI
 from datetime import datetime, date
 from typing import Dict
@@ -21,7 +21,7 @@ def get_os_version() -> Dict[str, str]:
     :return: OS의 종류 및 버전을 포함한 JSON 응답
     """
     return {
-	"os_version": get_os_version(),
+	"os_version": gov(),
 	"message": "Got the OS version successfully!"
     }
 

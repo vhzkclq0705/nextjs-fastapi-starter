@@ -88,10 +88,18 @@ def random_student() -> Dict[str, str]:
 	"message": "got a random student successfully!"
     }
 
-app.get("/api/py/select_all")
+@app.get("/api/py/select_all")
 def select_all():
     # pandas DataFrame을 임의로 하나 만들기
-    
     # 임의로 만든 DataFrame을 아래와 같은 형식으로 return
     # df.to_dict()
-    return {"message": "Hello from fastapi!"}
+    # Next -> DB 에서 알아와서 DataFrame으로 변환 후 아래와 같은 형식으로 리턴
+    import json
+    json_data = '''[
+        {"id": 1, "name": "Kim"},
+        {"id": 2, "name": "Lee"}
+    ]'''
+    data = json.loads(json_data)
+    df = pd.DataFrame(data)
+    
+    return df.to_dict(orient="records")

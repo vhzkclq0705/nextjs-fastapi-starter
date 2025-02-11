@@ -4,6 +4,7 @@ from datetime import datetime, date
 from typing import Dict
 import random
 import sys
+import pandas as pd
 
 ### Create FastAPI instance with custom docs and openapi url
 app = FastAPI(docs_url="/api/py/docs", openapi_url="/api/py/openapi.json")
@@ -86,3 +87,11 @@ def random_student() -> Dict[str, str]:
 	"version": sys.version,
 	"message": "got a random student successfully!"
     }
+
+app.get("/api/py/select_all")
+def select_all():
+    # pandas DataFrame을 임의로 하나 만들기
+    
+    # 임의로 만든 DataFrame을 아래와 같은 형식으로 return
+    # df.to_dict()
+    return {"message": "Hello from fastapi!"}

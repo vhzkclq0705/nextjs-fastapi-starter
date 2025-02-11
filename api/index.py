@@ -1,5 +1,4 @@
 import korean_age_calculator as kac
-from check_os_ver.osver import get_os_version as gov
 from fastapi import FastAPI
 from datetime import datetime, date
 from typing import Dict
@@ -12,18 +11,6 @@ app = FastAPI(docs_url="/api/py/docs", openapi_url="/api/py/openapi.json")
 @app.get("/api/py/helloFastApi")
 def hello_fast_api():
     return {"message": "Hello from FastAPI"}
-
-@app.get("/api/py/getOSVersion")
-def get_os_version() -> Dict[str, str]:
-    """
-    OS의 종류와 버전을 받아오는 API
-    
-    :return: OS의 종류 및 버전을 포함한 JSON 응답
-    """
-    return {
-	"os_version": gov(),
-	"message": "Got the OS version successfully!"
-    }
 
 @app.get("/api/py/ageCalculator/{birthday}")
 def age_calculator(birthday: str) -> Dict[str, str]:

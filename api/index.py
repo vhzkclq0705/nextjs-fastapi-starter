@@ -6,7 +6,6 @@ from database.database import Database
 import json
 import random
 import sys
-import pandas as pd
 
 ### Create FastAPI instance with custom docs and openapi url
 app = FastAPI(docs_url="/api/py/docs", openapi_url="/api/py/openapi.json")
@@ -96,6 +95,5 @@ def random_student() -> Dict[str, str]:
 @app.get("/api/py/select_all")
 def select_all():
     data = db.select_data()
-    df = pd.DataFrame(data, columns=['menu', 'member', 'date'])
     
-    return df.to_dict(orient='records')
+    return data

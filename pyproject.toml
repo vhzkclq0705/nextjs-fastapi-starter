@@ -1,0 +1,4 @@
+
+[project]
+dependencies = ["fastapi==0.115.0", "uvicorn[standard]==0.30.6", "korean-age-calculator==1.0.0", "check-os-ver==0.4.3"]
+requires-python = ">=3.10"
